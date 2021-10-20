@@ -3,6 +3,7 @@ import axios from "axios";
 import Accordion from "../Accordion";
 import { Wrapper } from "../../GlobalStyled";
 import { FieldItem, FieldsSelection } from "./Styled";
+import { fetchData } from "./api";
 
 function OffensiveList() {
   const [originalRecords, setOriginalRecords] = useState([]);
@@ -11,34 +12,26 @@ function OffensiveList() {
   const [filter, setFilter] = useState("");
 
   useEffect(() => {
-    axios
-      .get(
-        "/api/3/action/datastore_search?resource_id=590083cd-be2f-4a6c-871e-0ec4c717717b"
-      )
-      .then((response) => {
-        const {
-          data: {
-            result: { records, fields },
-          },
-        } = response;
+    fetchData().then((response) => {
+      const { records, fields } = response;
 
-        const groupBySuburb = records.reduce((acc, item) => {
-          const key = item["Suburb - Incident"];
+      const groupBySuburb = records.reduce((acc, item) => {
+        const key = item["Suburb - Incident"];
 
-          acc.set(key, [...(acc.get(key) || []), item]);
+        acc.set(key, [...(acc.get(key) || []), item]);
 
-          return acc;
-        }, new Map());
+        return acc;
+      }, new Map());
 
-        setOriginalRecords(records);
-        setRecords(groupBySuburb);
+      setOriginalRecords(records);
+      setRecords(groupBySuburb);
 
-        const fieldsOption = fields
-          .map((item) => item.id)
-          .filter((field) => field !== "_id");
+      const fieldsOption = fields
+        .map((item) => item.id)
+        .filter((field) => field !== "_id");
 
-        setFields(fieldsOption);
-      });
+      setFields(fieldsOption);
+    });
   }, []);
 
   // useEffect(() => {

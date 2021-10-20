@@ -16,7 +16,7 @@ const GlobalStyle = createGlobalStyle`
 export const Wrapper = styled.div`
   width: 900px;
   margin: 0 auto;
-  @media screen and (max-width: 400px) {
+  @media screen and (max-width: 900px) {
     width: 95%;
   }
 `;
