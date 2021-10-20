@@ -48,13 +48,15 @@ function OffensiveList() {
   // }, [fields]);
 
   useEffect(() => {
-    const groupBySuburb = originalRecords.reduce((acc, item) => {
-      const key = item[filter];
+    const groupBySuburb = originalRecords
+      .sort((a, b) => a[filter].localeCompare(b[filter]))
+      .reduce((acc, item) => {
+        const key = item[filter];
 
-      acc.set(key, [...(acc.get(key) || []), item]);
+        acc.set(key, [...(acc.get(key) || []), item]);
 
-      return acc;
-    }, new Map());
+        return acc;
+      }, new Map());
 
     setRecords(groupBySuburb);
   }, [filter]);

@@ -7,6 +7,9 @@ export const AccordionItem = styled.div`
   margin: 16px 0;
   padding: 20px;
   cursor: pointer;
+  @media screen and (max-width: 400px) {
+    padding: 12px;
+  }
 `;
 
 export const AccordionHeader = styled.div`

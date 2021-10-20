@@ -1,6 +1,6 @@
 import styled, { createGlobalStyle } from "styled-components";
 
-export const PrimaryColor = '#004b88';
+export const PrimaryColor = "#004b88";
 
 const GlobalStyle = createGlobalStyle`
   * {
@@ -16,6 +16,9 @@ const GlobalStyle = createGlobalStyle`
 export const Wrapper = styled.div`
   width: 900px;
   margin: 0 auto;
+  @media screen and (max-width: 400px) {
+    width: 95%;
+  }
 `;
 
 export default GlobalStyle;

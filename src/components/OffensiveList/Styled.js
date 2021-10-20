@@ -15,8 +15,8 @@ export const FieldItem = styled.div`
   background-color: ${({ selected }) => (selected ? PrimaryColor : "#fff")};
   border-radius: 16px;
   cursor: pointer;
+  padding: 12px;
   &:not(:last-child) {
     margin-right: 20px;
-    padding: 12px;
   }
 `;

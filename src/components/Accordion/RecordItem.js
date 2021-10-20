@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { PrimaryColor } from "../../GlobalStyled";
 
 function RecordItem({ record }) {
   // Offence Level 1 Description: "OFFENCES AGAINST PROPERTY"
@@ -64,7 +65,7 @@ const RecordItemWrapper = styled.div`
     }
 
     .level-3 {
-      color: #333;
+      color: ${PrimaryColor};
       font-size: 20px;
     }
     .count {
@@ -74,12 +75,19 @@ const RecordItemWrapper = styled.div`
       top: 16px;
       right: 16px;
       text-transform: uppercase;
+      @media screen and (max-width: 400px) {
+        position: relative;
+        top: 0;
+        left: 0;
+        margin: 12px 0;
+      }
       > span {
-        width: 30px;
+        color: ${PrimaryColor};
+        width: 35px;
         display: inline-block;
         padding: 4px 6px;
         background-color: #ececec;
-        border-radius: 10px;
+        border-radius: 30px;
         margin-left: 12px;
         font-weight: bold;
         text-align: center;
@@ -88,10 +96,16 @@ const RecordItemWrapper = styled.div`
   }
 
   .record-content {
+    display: flex;
+    align-items: flex-start;
     margin-top: 16px;
+    border-radius: 10px;
+    background-color: #fafafa;
     .field {
+      flex-basis: calc(100% / 3);
+      padding: 12px;
       &:not(:last-child) {
-        margin-bottom: 8px;
+        border-right: 2px solid #fff;
       }
       label {
         display: block;
