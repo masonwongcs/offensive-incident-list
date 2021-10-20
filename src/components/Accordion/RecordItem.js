@@ -86,7 +86,7 @@ const RecordItemWrapper = styled.div`
         width: 35px;
         display: inline-block;
         padding: 4px 6px;
-        background-color: #ececec;
+        background-color: #f5f5f5;
         border-radius: 30px;
         margin-left: 12px;
         font-weight: bold;
