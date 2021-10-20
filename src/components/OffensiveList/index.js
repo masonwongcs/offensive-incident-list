@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 import Accordion from "../Accordion";
 import { Wrapper } from "../../GlobalStyled";
 import { FieldItem, FieldsSelection } from "./Styled";
@@ -15,16 +14,7 @@ function OffensiveList() {
     fetchData().then((response) => {
       const { records, fields } = response;
 
-      const groupBySuburb = records.reduce((acc, item) => {
-        const key = item["Suburb - Incident"];
-
-        acc.set(key, [...(acc.get(key) || []), item]);
-
-        return acc;
-      }, new Map());
-
       setOriginalRecords(records);
-      setRecords(groupBySuburb);
 
       const fieldsOption = fields
         .map((item) => item.id)
@@ -34,24 +24,29 @@ function OffensiveList() {
     });
   }, []);
 
-  // useEffect(() => {
-  //   if (fields.length !== 0) {
-  //     setFilter(fields[0]);
-  //   }
-  // }, [fields]);
+  useEffect(() => {
+    if (
+      fields.length !== 0 &&
+      fields.find((item) => item === "Suburb - Incident")
+    ) {
+      setFilter("Suburb - Incident");
+    }
+  }, [fields]);
 
   useEffect(() => {
-    const groupBySuburb = originalRecords
-      .sort((a, b) => a[filter].localeCompare(b[filter]))
-      .reduce((acc, item) => {
-        const key = item[filter];
+    if (originalRecords.length !== 0) {
+      const groupBySuburb = originalRecords
+        .sort((a, b) => a[filter].localeCompare(b[filter]))
+        .reduce((acc, item) => {
+          const key = item[filter];
 
-        acc.set(key, [...(acc.get(key) || []), item]);
+          acc.set(key, [...(acc.get(key) || []), item]);
 
-        return acc;
-      }, new Map());
+          return acc;
+        }, new Map());
 
-    setRecords(groupBySuburb);
+      setRecords(groupBySuburb);
+    }
   }, [filter]);
 
   return (
